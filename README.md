@@ -38,19 +38,19 @@ analytics = Bento::Analytics.new(write_key: "YOUR-SITE-ID")
 Then go wild tracking events!
 ```ruby
 # track a single event
-Analytics.track(identity: {email: "user@yourapp.com"}, event: '$action', details: {action_information: "api_test"})
+analytics.track(identity: {email: "user@yourapp.com"}, event: '$action', details: {action_information: "api_test"})
 
 # update a users custom field
-Analytics.track(identity: {email: "user@yourapp.com"}, event: '$update_details', custom_fields: {favourite_meal: "bento box"})
+analytics.track(identity: {email: "user@yourapp.com"}, event: '$update_details', custom_fields: {favourite_meal: "bento box"})
 
 # tag a visitor
-Analytics.track(identity: {email: "user@yourapp.com"}, event: '$tag', details: {tag: "customer"})
+analytics.track(identity: {email: "user@yourapp.com"}, event: '$tag', details: {tag: "customer"})
 
 # track a unique event and add LTV (example below tracks $12.34 USD)
-Analytics.track(identity: {email: "user@yourapp.com"}, event: '$payment', details: {value: {amount: 1234, currency: "USD"}, unique: {key: "unique-identifier"}})
+analytics.track(identity: {email: "user@yourapp.com"}, event: '$payment', details: {value: {amount: 1234, currency: "USD"}, unique: {key: "unique-identifier"}})
 
 # track a pageview server-side
-Analytics.track(identity: {email: "user@yourapp.com"}, event: '$view', page: {url: "api_test", title: ""})
+analytics.track(identity: {email: "user@yourapp.com"}, event: '$view', page: {url: "api_test", title: ""})
 
 ```
 
