@@ -1,4 +1,4 @@
-require 'bento/sdk/defaults'
+require "bento/sdk/defaults"
 
 module Bento
   class Analytics

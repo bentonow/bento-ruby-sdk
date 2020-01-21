@@ -2,14 +2,14 @@ module Bento
   class Analytics
     module Defaults
       module Request
-        HOST = 'app.bentonow.com'
+        HOST = "app.bentonow.com"
         PORT = 443
-        PATH = '/tracking/events/'
+        PATH = "/tracking/events/"
         SSL = true
 
-        HEADERS = { 'Accept' => 'application/json',
-                    'Content-Type' => 'application/json',
-                    'User-Agent' => "bento-ruby" }
+        HEADERS = {"Accept" => "application/json",
+                   "Content-Type" => "application/json",
+                   "User-Agent" => "bento-ruby",}
         RETRIES = 15
       end
 

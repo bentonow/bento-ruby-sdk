@@ -1,4 +1,4 @@
-require 'securerandom'
+require "securerandom"
 
 module Bento
   class Analytics
@@ -45,10 +45,10 @@ module Bento
       # public: Returns a uid string
       #
       def uid
-        arr = SecureRandom.random_bytes(16).unpack('NnnnnN')
+        arr = SecureRandom.random_bytes(16).unpack("NnnnnN")
         arr[2] = (arr[2] & 0x0fff) | 0x4000
         arr[3] = (arr[3] & 0x3fff) | 0x8000
-        '%08x-%04x-%04x-%04x-%04x%08x' % arr
+        "%08x-%04x-%04x-%04x-%04x%08x" % arr
       end
 
       def datetime_in_iso8601(datetime)
@@ -66,14 +66,14 @@ module Bento
 
       def time_in_iso8601(time, fraction_digits = 3)
         fraction = if fraction_digits > 0
-                     ('.%06i' % time.usec)[0, fraction_digits + 1]
-                   end
+          (".%06i" % time.usec)[0, fraction_digits + 1]
+        end
 
-        "#{time.strftime('%Y-%m-%dT%H:%M:%S')}#{fraction}#{formatted_offset(time, true, 'Z')}"
+        "#{time.strftime("%Y-%m-%dT%H:%M:%S")}#{fraction}#{formatted_offset(time, true, "Z")}"
       end
 
       def date_in_iso8601(date)
-        date.strftime('%F')
+        date.strftime("%F")
       end
 
       def formatted_offset(time, colon = true, alternate_utc_string = nil)
@@ -81,11 +81,11 @@ module Bento
       end
 
       def seconds_to_utc_offset(seconds, colon = true)
-        (colon ? UTC_OFFSET_WITH_COLON : UTC_OFFSET_WITHOUT_COLON) % [(seconds < 0 ? '-' : '+'), (seconds.abs / 3600), ((seconds.abs % 3600) / 60)]
+        (colon ? UTC_OFFSET_WITH_COLON : UTC_OFFSET_WITHOUT_COLON) % [(seconds < 0 ? "-" : "+"), (seconds.abs / 3600), ((seconds.abs % 3600) / 60)]
       end
 
-      UTC_OFFSET_WITH_COLON = '%s%02d:%02d'
-      UTC_OFFSET_WITHOUT_COLON = UTC_OFFSET_WITH_COLON.sub(':', '')
+      UTC_OFFSET_WITH_COLON = "%s%02d:%02d"
+      UTC_OFFSET_WITHOUT_COLON = UTC_OFFSET_WITH_COLON.sub(":", "")
     end
   end
 end

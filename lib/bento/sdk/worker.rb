@@ -1,7 +1,7 @@
-require 'bento/sdk/defaults'
-require 'bento/sdk/message_batch'
-require 'bento/sdk/transport'
-require 'bento/sdk/utils'
+require "bento/sdk/defaults"
+require "bento/sdk/message_batch"
+require "bento/sdk/transport"
+require "bento/sdk/utils"
 
 module Bento
   class Analytics

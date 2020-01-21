@@ -1,5 +1,5 @@
-require 'forwardable'
-require 'bento/sdk/logging'
+require "forwardable"
+require "bento/sdk/logging"
 
 module Bento
   class Analytics
@@ -20,13 +20,13 @@ module Bento
       def <<(message)
         begin
           message_json = message.to_json
-        rescue StandardError => e
+        rescue => e
           raise JSONGenerationError, "Serialization error: #{e}"
         end
 
         message_json_size = message_json.bytesize
         if message_too_big?(message_json_size)
-          logger.error('a message exceeded the maximum allowed size')
+          logger.error("a message exceeded the maximum allowed size")
         else
           @messages << message
           @json_size += message_json_size + 1 # One byte for the comma

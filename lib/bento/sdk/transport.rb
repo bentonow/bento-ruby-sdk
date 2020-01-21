@@ -1,11 +1,11 @@
-require 'bento/sdk/defaults'
-require 'bento/sdk/utils'
-require 'bento/sdk/response'
-require 'bento/sdk/logging'
-require 'bento/sdk/backoff_policy'
-require 'net/http'
-require 'net/https'
-require 'json'
+require "bento/sdk/defaults"
+require "bento/sdk/utils"
+require "bento/sdk/response"
+require "bento/sdk/logging"
+require "bento/sdk/backoff_policy"
+require "net/http"
+require "net/https"
+require "json"
 
 module Bento
   class Analytics
@@ -36,9 +36,8 @@ module Bento
       #
       # @return [Response] API response
       def send(write_key, batch)
-
         logger.debug("Sending request for #{batch.length} items")
-        last_response, exception = retry_with_backoff(@retries) do
+        last_response, exception = retry_with_backoff(@retries) {
           status_code, body = send_request(write_key, batch)
 
           error = ""
@@ -48,7 +47,7 @@ module Bento
           logger.debug("🍱Response error (if any): #{error}") if error
 
           [Bento::Analytics::Response.new(status_code, error), should_retry]
-        end
+        }
 
         if exception
           logger.error(exception.message)
@@ -93,7 +92,7 @@ module Bento
         begin
           result, should_retry = yield
           return [result, nil] unless should_retry
-        rescue StandardError => e
+        rescue => e
           should_retry = true
           caught_exception = e
         end
@@ -109,7 +108,6 @@ module Bento
 
       # Sends a request for the batch, returns [status_code, body]
       def send_request(write_key, batch)
-
         batch_to_json = JSON.parse(batch.to_json)
         batch_to_hash = Hash[batch_to_json.each_with_index.map { |value, index| [index, value] }]
 
@@ -126,20 +124,19 @@ module Bento
           logger.debug "stubbed request to #{@path}: " \
             "write key = #{write_key}, batch = #{JSON.generate(batch)}"
 
-          [200, '{}']
+          [200, "{}"]
         else
           @http.start unless @http.started? # Maintain a persistent connection
           response = @http.request(request, payload)
           [response.code.to_i, response.body]
         end
-
       end
 
       class << self
         attr_writer :stub
 
         def stub
-          @stub || ENV['STUB']
+          @stub || ENV["STUB"]
         end
       end
     end

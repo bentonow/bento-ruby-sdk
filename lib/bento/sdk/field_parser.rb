@@ -14,33 +14,32 @@ module Bento
           identity = fields[:identity] || {}
           page = fields[:page] || {}
 
-          check_presence!(event, 'event')
-          check_is_hash!(details, 'details')
-          check_is_hash!(page, 'page')
-          check_is_hash!(identity, 'identity')
-          check_is_hash!(custom_fields, 'custom_fields')
+          check_presence!(event, "event")
+          check_is_hash!(details, "details")
+          check_is_hash!(page, "page")
+          check_is_hash!(identity, "identity")
+          check_is_hash!(custom_fields, "custom_fields")
 
           isoify_dates! details
 
           final_event = {
-            :id => SecureRandom.hex(10),
-            :site => write_key,
-            :identity => identity,
-            :visit => SecureRandom.hex(10),
-            :visitor => SecureRandom.hex(10),
-            :type => event.to_s,
-            :date => Time.now,
-            :browser => {
-                "user_agent" => "Bento/API (Rails)"
+            id: SecureRandom.hex(10),
+            site: write_key,
+            identity: identity,
+            visit: SecureRandom.hex(10),
+            visitor: SecureRandom.hex(10),
+            type: event.to_s,
+            date: Time.now,
+            browser: {
+              "user_agent" => "Bento/API (Rails)",
             },
-            :page => page,
-            :details => details,
-            :fields => custom_fields
+            page: page,
+            details: details,
+            fields: custom_fields,
           }
 
-          common = common.merge(final_event);
+          common = common.merge(final_event)
           common
-
         end
 
         private
@@ -58,9 +57,9 @@ module Bento
           add_context! context
 
           parsed = {
-            :page => page,
-            :date => datetime_in_iso8601(timestamp),
-            :identity => {email: nil}
+            page: page,
+            date: datetime_in_iso8601(timestamp),
+            identity: {email: nil},
           }
 
           parsed[:identity][:email] = fields[:identity][:email] if fields[:identity][:email]
@@ -71,16 +70,16 @@ module Bento
 
         def check_user_id!(fields)
           unless fields[:identity] || fields[:visitor]
-            raise ArgumentError, 'Must supply either user_id or anonymous_id'
+            raise ArgumentError, "Must supply either user_id or anonymous_id"
           end
         end
 
         def check_timestamp!(timestamp)
-          raise ArgumentError, 'Timestamp must be a Time' unless timestamp.is_a? Time
+          raise ArgumentError, "Timestamp must be a Time" unless timestamp.is_a? Time
         end
 
         def add_context!(context)
-          context[:library] = { :name => 'analytics-ruby' }
+          context[:library] = {name: "analytics-ruby"}
         end
 
         # private: Ensures that a string is non-empty
