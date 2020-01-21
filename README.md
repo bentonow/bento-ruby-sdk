@@ -1,4 +1,4 @@
-Bento SDK for Ruby
+# Bento SDK for Ruby
 
 🍱 Simple, powerful analytics for Ruby/Rails projects!
 
