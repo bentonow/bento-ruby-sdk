@@ -1,15 +1,14 @@
-require 'bento/sdk/version'
-require 'bento/sdk/defaults'
-require 'bento/sdk/utils'
-require 'bento/sdk/field_parser'
-require 'bento/sdk/client'
-require 'bento/sdk/worker'
-require 'bento/sdk/transport'
-require 'bento/sdk/response'
-require 'bento/sdk/logging'
+require "bento/sdk/version"
+require "bento/sdk/defaults"
+require "bento/sdk/utils"
+require "bento/sdk/field_parser"
+require "bento/sdk/client"
+require "bento/sdk/worker"
+require "bento/sdk/transport"
+require "bento/sdk/response"
+require "bento/sdk/logging"
 
 module Bento
-
   class << self
     attr_writer :write_key
   end
@@ -27,7 +26,7 @@ module Bento
     # @option options [Boolean] :stub (false) If true, requests don't hit the
     #   server and are stubbed to be successful.
     def initialize(options = {})
-      Transport.stub = options[:stub] if options.has_key?(:stub)
+      Transport.stub = options[:stub] if options.key?(:stub)
       @client = Bento::Analytics::Client.new options
     end
 

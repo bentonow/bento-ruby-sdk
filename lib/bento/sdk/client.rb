@@ -1,10 +1,9 @@
-require 'thread'
-require 'time'
+require "time"
 
-require 'bento/sdk/defaults'
-require 'bento/sdk/logging'
-require 'bento/sdk/utils'
-require 'bento/sdk/worker'
+require "bento/sdk/defaults"
+require "bento/sdk/logging"
+require "bento/sdk/utils"
+require "bento/sdk/worker"
 
 module Bento
   class Analytics
@@ -86,7 +85,6 @@ module Bento
       #
       # returns Boolean of whether the item was added to the queue.
       def enqueue(action)
-
         if @queue.length < @max_queue_size
           @queue << action
           ensure_worker_running
@@ -94,9 +92,9 @@ module Bento
           true
         else
           logger.warn(
-            'Queue is full, dropping events. The :max_queue_size ' \
-            'configuration parameter can be increased to prevent this from ' \
-            'happening.'
+            "Queue is full, dropping events. The :max_queue_size " \
+            "configuration parameter can be increased to prevent this from " \
+            "happening."
           )
           false
         end
@@ -104,21 +102,21 @@ module Bento
 
       # private: Checks that the write_key is properly initialized
       def check_write_key!
-        raise ArgumentError, 'Write key must be initialized' if @write_key.nil?
+        raise ArgumentError, "Write key must be initialized" if @write_key.nil?
       end
 
       def ensure_worker_running
         return if worker_running?
         @worker_mutex.synchronize do
           return if worker_running?
-          @worker_thread = Thread.new do
+          @worker_thread = Thread.new {
             @worker.run
-          end
+          }
         end
       end
 
       def worker_running?
-        @worker_thread && @worker_thread.alive?
+        @worker_thread&.alive?
       end
     end
   end

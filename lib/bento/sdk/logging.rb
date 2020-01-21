@@ -1,4 +1,4 @@
-require 'logger'
+require "logger"
 
 module Bento
   class Analytics
@@ -32,13 +32,13 @@ module Bento
           return @logger if @logger
 
           base_logger = if defined?(Rails)
-                          Rails.logger
-                        else
-                          logger = Logger.new STDOUT
-                          logger.progname = 'Bento::Analytics'
-                          logger
-                        end
-          @logger = PrefixedLogger.new(base_logger, '[bento-sdk]')
+            Rails.logger
+          else
+            logger = Logger.new STDOUT
+            logger.progname = "Bento::Analytics"
+            logger
+          end
+          @logger = PrefixedLogger.new(base_logger, "[bento-sdk]")
         end
 
         attr_writer :logger

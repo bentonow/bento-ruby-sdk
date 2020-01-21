@@ -1,1 +1,1 @@
-require 'bento'
+require "bento/analytics"
