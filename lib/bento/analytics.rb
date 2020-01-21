@@ -11,7 +11,7 @@ require 'bento/sdk/logging'
 module Bento
 
   class << self
-    mattr_accessor :write_key
+    attr_writer :write_key
   end
 
   def self.configure(&block)
