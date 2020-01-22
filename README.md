@@ -1,4 +1,5 @@
 # Bento SDK for Ruby
+[![Build Status](https://travis-ci.org/bentonow/bento-ruby-sdk.svg?branch=master)](https://travis-ci.org/bentonow/bento-ruby-sdk)
 
 🍱 Simple, powerful analytics for Ruby/Rails projects!
 
