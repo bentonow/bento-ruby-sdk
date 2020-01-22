@@ -24,11 +24,7 @@ Create an initializer called `bento.rb` with the following:
 ```ruby
 site_id = "YOUR-SITE-ID"
 
-Bento.configure do |config|
-  config.write_key = site_id
-end
-
-::Analytics = Bento::Analytics.new() # to use Analytics.track() globally across your application!
+::Analytics = Bento::Analytics.new(write_key: site_id) # to use Analytics.track() globally across your application!
 ```
 
 Or, if you fancy, just boot it up manually:
