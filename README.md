@@ -20,14 +20,15 @@ gem 'bento-sdk', github: "bentonow/bento-ruby-sdk", branch: "master"
 
 ## Usage
 
-Create an initializer called `bento.rb` with the following:
+If you have a Rails project create an initializer called `bento.rb` with the following:
 ```ruby
 site_id = "YOUR-SITE-ID"
 
+# Make Analytics.track() globally available!
 ::Analytics = Bento::Analytics.new(write_key: site_id) # to use Analytics.track() globally across your application!
 ```
 
-Or, if you fancy, just boot it up manually:
+Or, if you fancy, just boot it up via:
 ```ruby
 analytics = Bento::Analytics.new(write_key: "YOUR-SITE-ID")
 ```
