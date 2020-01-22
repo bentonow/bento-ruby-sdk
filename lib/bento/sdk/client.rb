@@ -21,7 +21,7 @@ module Bento
         symbolize_keys!(opts)
 
         @queue = Queue.new
-        @write_key = opts[:write_key] || Bento.write_key
+        @write_key = opts[:write_key]
 
         logger.debug("🍱Tracked events will be sent to: #{@write_key}")
 
