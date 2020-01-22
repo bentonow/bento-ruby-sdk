@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.description = "The Bentonow.com ruby analytics library"
   spec.authors = ["Bentonow.com"]
   spec.email = "support@Bentonow.com"
-  spec.homepage = "https://github.com/bentonow/ruby-sdk"
+  spec.homepage = "https://github.com/bentonow/bento-ruby-sdk"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.0"
 
