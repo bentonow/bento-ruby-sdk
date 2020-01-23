@@ -28,8 +28,8 @@ module Bento
             id: SecureRandom.hex(10),
             site: write_key,
             identity: identity,
-            visit: Digest::SHA2.hexdigest(Time.now.strftime("%B %e, %Y") + identity.to_s),
-            visitor: Digest::SHA2.hexdigest("api" + identity.to_s),
+            visit: Digest::SHA2.hexdigest(Time.now.strftime("%B %e, %Y") + identity.to_s + write_key),
+            visitor: Digest::SHA2.hexdigest("api" + identity.to_s + write_key),
             type: event.to_s,
             date: Time.now,
             browser: {
