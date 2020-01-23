@@ -81,7 +81,7 @@ module Bento
         end
 
         def add_context!(context)
-          context[:library] = {name: "analytics-ruby"}
+          context[:library] = {name: "bento-ruby"}
         end
 
         # private: Ensures that a string is non-empty
