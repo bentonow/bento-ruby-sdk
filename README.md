@@ -45,7 +45,7 @@ analytics.track(identity: {email: "user@yourapp.com"}, event: '$update_details',
 analytics.track(identity: {email: "user@yourapp.com"}, event: '$tag', details: {tag: "customer"})
 
 # track a unique event and add LTV (example below tracks $12.34 USD)
-analytics.track(identity: {email: "user@yourapp.com"}, event: '$payment', details: {value: {amount: 1234, currency: "USD"}, unique: {key: "unique-identifier"}})
+analytics.track(identity: {email: "user@yourapp.com"}, event: '$payment', details: {value: {amount: 1234, currency: "USD"}, unique: {key: 123456}})
 
 # track a pageview server-side
 analytics.track(identity: {email: "user@yourapp.com"}, event: '$view', page: {url: "api_test", title: ""})
