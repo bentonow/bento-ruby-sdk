@@ -65,8 +65,8 @@ module Bento
             identity: {email: nil},
           }
 
-          parsed[:identity][:email] = fields[:identity][:email] if fields[:identity][:email]
-          parsed[:visitor] = fields[:visitor_id] if fields[:visitor_id]
+          parsed[:identity][:email] = fields[:identity][:email] if fields[:identity]
+          parsed[:visitor] = fields[:visitor_uuid] if fields[:visitor_uuid]
 
           parsed
         end
