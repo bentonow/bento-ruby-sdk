@@ -14,6 +14,7 @@ module Bento
           custom_fields = fields[:custom_fields] || {}
           details = fields[:details] || {}
           identity = fields[:identity] || {}
+          visitor_uuid = fields[:visitor_uuid] || Digest::SHA2.hexdigest("api" + identity.to_s + write_key)
           page = fields[:page] || {}
 
           check_presence!(event, "event")
@@ -29,7 +30,7 @@ module Bento
             site: write_key,
             identity: identity,
             visit: Digest::SHA2.hexdigest(Time.now.strftime("%B %e, %Y") + identity.to_s + write_key),
-            visitor: Digest::SHA2.hexdigest("api" + identity.to_s + write_key),
+            visitor: visitor_uuid,
             type: event.to_s,
             date: Time.now,
             browser: {
