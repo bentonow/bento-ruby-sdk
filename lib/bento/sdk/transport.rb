@@ -15,9 +15,9 @@ module Bento
       include Bento::Analytics::Logging
 
       def initialize(options = {})
-        options[:host] ||= HOST
-        options[:port] ||= PORT
-        options[:ssl] ||= SSL
+        options[:host] ||= ENV.fetch('BENTO_RUBY_SDK_HOST', HOST)
+        options[:port] ||= ENV.fetch('BENTO_RUBY_SDK_PORT', PORT)
+        options[:ssl] ||= ENV.fetch('BENTO_RUBY_SDK_SSL', SSL) == 'true' || ENV.fetch('BENTO_RUBY_SDK_SSL', SSL) == true
         @headers = options[:headers] || HEADERS
         @path = options[:path] || PATH
         @retries = options[:retries] || RETRIES
