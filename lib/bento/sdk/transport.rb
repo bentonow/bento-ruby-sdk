@@ -17,7 +17,7 @@ module Bento
       def initialize(options = {})
         options[:host] ||= ENV.fetch('BENTO_RUBY_SDK_HOST', HOST)
         options[:port] ||= ENV.fetch('BENTO_RUBY_SDK_PORT', PORT)
-        options[:ssl] ||= ENV.fetch('BENTO_RUBY_SDK_SSL', SSL) == 'true' || ENV.fetch('BENTO_RUBY_SDK_SSL', SSL) == true
+        options[:ssl] ||= ssl_enabled
         @headers = options[:headers] || HEADERS
         @path = options[:path] || PATH
         @retries = options[:retries] || RETRIES
@@ -64,6 +64,11 @@ module Bento
       end
 
       private
+
+      def ssl_enabled
+        ssl_config = ENV.fetch('BENTO_RUBY_SDK_SSL', SSL)
+        ssl_config == 'true' || ssl_config == true
+      end
 
       def should_retry_request?(status_code, body)
         if status_code >= 500
