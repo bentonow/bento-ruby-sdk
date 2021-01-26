@@ -73,7 +73,7 @@ module Bento
 
         def check_user_id!(fields)
           unless fields[:identity] || fields[:visitor_uuid]
-            raise ArgumentError, "Must supply either user_id or anonymous_id"
+            raise ArgumentError, "Must supply either visitor_uuid or identity"
           end
         end
 
