@@ -66,7 +66,7 @@ module Bento
           }
 
           parsed[:identity][:email] = fields[:identity][:email] if fields[:identity]
-          parsed[:visitor] = fields[:visitor_uuid] if fields[:visitor_uuid]
+          parsed[:visitor_uuid] = fields[:visitor_uuid] if fields[:visitor_uuid]
 
           parsed
         end
