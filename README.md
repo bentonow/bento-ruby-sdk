@@ -22,10 +22,10 @@ gem 'bento-sdk', github: "bentonow/bento-ruby-sdk", branch: "master"
 
 If you have a Rails project create an initializer called `bento.rb` with the following:
 ```ruby
-site_id = "YOUR-SITE-ID"
+site_uuid = "YOUR-SITE-UUID" # This is the same UUID you are provided during onboarding. You can also find it by clicking on the gear icon on the top right and visiting "Site Configuration".
 
 # Make Analytics.track() globally available!
-::Analytics = Bento::Analytics.new(write_key: site_id) # to use Analytics.track() globally across your application!
+::Analytics = Bento::Analytics.new(write_key: site_uuid) # to use Analytics.track() globally across your application!
 ```
 
 Or, if you fancy, just boot it up via:
