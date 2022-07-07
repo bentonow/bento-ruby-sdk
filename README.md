@@ -33,7 +33,7 @@ Or, if you fancy, just boot it up via:
 analytics = Bento::Analytics.new(write_key: "YOUR-SITE-ID")
 ```
 
-Then go wild tracking events!
+Then go wild tracking events:
 ```ruby
 # track a single event
 analytics.track(identity: {email: "user@yourapp.com"}, event: '$action', details: {action_information: "api_test"})
@@ -52,6 +52,28 @@ analytics.track(identity: {email: "user@yourapp.com"}, event: '$view', page: {ur
 
 ```
 
+If you're worried about having an external API in the middle of a critical path, throw it in a Sidekiq background job:
+```ruby
+class BentoAnalyticsJob
+  include Sidekiq::Job
+  queue_as :default
+
+  def perform(email, event_type, event_details = {}, custom_fields = {})
+    event_details = JSON.parse(event_details)
+    custom_fields = JSON.parse(custom_fields)
+
+    
+    ::BentoAnalytics.track(
+      identity: {
+        email: email
+      },
+      event: event_type,
+      details: event_details,
+      custom_fields: custom_fields
+    )
+  end
+end
+```
 
 ## Things to know
 
