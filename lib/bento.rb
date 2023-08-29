@@ -1,8 +1,9 @@
 require 'bento_v2/version'
-require "bento_v2/client"
+require 'bento_v2/client'
 require 'bento_v2/configuration'
 
 require 'logger'
+require 'forwardable'
 
 module Bento
   class Error < StandardError; end
@@ -32,6 +33,14 @@ module Bento
   end
 
   class << self
+    extend Forwardable
+    
+    # User configurable options
+    def_delegators :@config, :site_uuid, :site_uuid=
+    def_delegators :@config, :publishable_key, :publishable_key=
+    def_delegators :@config, :secret_key, :secret_key=
+    def_delegators :@config, :log_level, :log_level=
+
     def config
       @config ||= Bento::Configuration.new
     end
