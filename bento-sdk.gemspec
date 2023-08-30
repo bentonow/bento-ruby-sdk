@@ -2,7 +2,7 @@ require File.expand_path("../lib/bento/sdk/version", __FILE__)
 
 Gem::Specification.new do |spec|
   spec.name = "bento-sdk"
-  spec.version = "0.1.0"
+  spec.version = "0.2.0"
   spec.files = Dir.glob("{lib,bin}/**/*")
   spec.require_paths = ["lib"]
   spec.summary = "Bento Ruby SDK and tracking library"
