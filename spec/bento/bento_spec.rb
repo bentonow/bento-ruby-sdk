@@ -2,6 +2,10 @@ require 'spec_helper'
 require 'bento-sdk'
 
 describe Bento do
+  it "has a version number" do
+    expect(Bento::VERSION).not_to be nil
+  end
+
   describe 'configures Bento using configure block ' do
     before do
       Bento.configure do |config|
@@ -42,5 +46,5 @@ describe Bento do
     it 'sets the secret_key from ENV' do
       expect(Bento.config.secret_key).to eq('secret_key')
     end
-  end
+  end  
 end
