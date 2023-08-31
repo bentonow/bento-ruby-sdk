@@ -1,7 +1,11 @@
 require "bento/analytics"
+require "bento/core/client"
+require "bento/core/version"
+require "bento/resources/subscribers"
 require "bento/sdk/configuration"
 
 require 'forwardable'
+require 'faraday'
 
 module Bento
   class Error < StandardError; end
