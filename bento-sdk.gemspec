@@ -1,8 +1,11 @@
-require File.expand_path("../lib/bento/sdk/version", __FILE__)
+require File.expand_path("../lib", __FILE__)
+
+# Maintain your gem's version:
+require "passwordless/version"
 
 Gem::Specification.new do |spec|
   spec.name = "bento-sdk"
-  spec.version = "0.2.0"
+  spec.version = Bento::VERSION
   spec.files = Dir.glob("{lib,bin}/**/*")
   spec.require_paths = ["lib"]
   spec.summary = "Bento Ruby SDK and tracking library"
@@ -11,7 +14,10 @@ Gem::Specification.new do |spec|
   spec.email = "support@Bentonow.com"
   spec.homepage = "https://github.com/bentonow/bento-ruby-sdk"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 2.0"
+  spec.required_ruby_version = ">= 2.6"
+
+  # Used in gem
+  spec.add_dependency 'faraday', "2.7.10"
 
   # Used in specs
   spec.add_development_dependency "rake", "~> 10.3"
