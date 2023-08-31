@@ -11,6 +11,8 @@ Track events, update data, record LTV and more in Ruby. Data is stored in your B
 
 ## Installation
 
+**Important note:** The minimum ruby version required has been **bumped to 2.6** as that's the minimum version required by the Faraday gem, which we introduced as a dependency for this gem
+
 Add this line to your application's Gemfile:
 
 ```ruby
