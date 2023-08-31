@@ -1,5 +1,5 @@
 module Bento
   class Analytics
-    VERSION = "0.2.0"
+    VERSION = "0.1"
   end
 end
