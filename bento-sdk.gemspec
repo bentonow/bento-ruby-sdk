@@ -1,7 +1,7 @@
-require File.expand_path("../lib", __FILE__)
+$LOAD_PATH.push(File.expand_path("../lib", __FILE__))
 
 # Maintain your gem's version:
-require "passwordless/version"
+require "bento/core/version"
 
 Gem::Specification.new do |spec|
   spec.name = "bento-sdk"
