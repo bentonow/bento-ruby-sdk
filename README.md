@@ -1,28 +1,30 @@
-# Bento SDK for Ruby
+# Bento SDK for Ruby on Rails
 [![Build Status](https://travis-ci.org/bentonow/bento-rails-sdk.svg?branch=master)](https://travis-ci.org/bentonow/bento-rails-sdk)
 
-🍱 Simple, powerful analytics for Ruby/Rails projects!
+🍱 Simple, powerful email marketing and automation for Ruby on Rails projects!
 
-Track events, update data, record LTV and more in Ruby. Data is stored in your Bento account so you can easily research and investigate what's going on.
+Track events, update user data, record LTV and more in Ruby. Data is stored in your Bento account so you can easily research and investigate what's going on. Use this gem to integrate Bento into your Ruby on Rails app!
 
 👋 To get personalized support, please tweet @bento or email jesse@bentonow.com!
 
 🐶 Battle-tested on Bento Production (we dog food this gem ourselves)!
 
+🤝 Contributions welcome and rewarded! Add a PR request for a surprise!
+
 ## Installation
 
-**Important note:** The minimum ruby version required is **2.6** as that's the minimum version required by the Faraday gem, which we use as a dependency.
+**Important note:** Faraday is currently a dependency of this gem, and the minimum ruby version required is **2.6** as that's the minimum version required by the Faraday gem.
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bento-sdk', github: "bentonow/bento-rails-sdk", branch: "master"
+gem 'bento-sdk', github: "bentonow/bento-ruby-sdk", branch: "master"
 ```
 
 Then, to fetch the gem:
 
 ```bash
-$ bundle
+$ bundle install
 ```
 
 ## Configuration
