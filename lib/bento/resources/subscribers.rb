@@ -2,7 +2,7 @@ module Bento
   class Subscribers
     class << self
       # Find or create a subscriber by email or uuid
-      # Usage: Bento::Subscribers.find_or_create_by(email: 'user@example.com')
+      # Usage: Bento::Subscribers.find_or_create_by(email: 'test@bentonow.com')
       # or: Bento::Subscribers.find_or_create_by(uuid: 'subscriber-uuid')
       def find_or_create_by(email: nil, uuid: nil)
         params = default_params
@@ -20,7 +20,7 @@ module Bento
       end
 
       # Run a command to change a subscriber's data
-      # Usage: Bento::Subscribers.run_command(command: 'add_tag', email: 'user@example.com', query: 'new_tag')
+      # Usage: Bento::Subscribers.run_command(command: 'add_tag', email: 'test@bentonow.com', query: 'new_tag')
       def run_command(command:, email:, query: nil)
         payload = {
           command: [{
@@ -35,43 +35,43 @@ module Bento
       end
 
       # Add a tag to a subscriber
-      # Usage: Bento::Subscribers.add_tag(email: 'user@example.com', tag: 'new_tag')
+      # Usage: Bento::Subscribers.add_tag(email: 'test@bentonow.com', tag: 'new_tag')
       def add_tag(email:, tag:)
         run_command(command: 'add_tag', email: email, query: tag)
       end
 
       # Add a tag to a subscriber via an event
-      # Usage: Bento::Subscribers.add_tag_via_event(email: 'user@example.com', tag: 'event_tag')
+      # Usage: Bento::Subscribers.add_tag_via_event(email: 'test@bentonow.com', tag: 'event_tag')
       def add_tag_via_event(email:, tag:)
         run_command(command: 'add_tag_via_event', email: email, query: tag)
       end
 
       # Remove a tag from a subscriber
-      # Usage: Bento::Subscribers.remove_tag(email: 'user@example.com', tag: 'old_tag')
+      # Usage: Bento::Subscribers.remove_tag(email: 'test@bentonow.com', tag: 'old_tag')
       def remove_tag(email:, tag:)
         run_command(command: 'remove_tag', email: email, query: tag)
       end
 
       # Add a field to a subscriber
-      # Usage: Bento::Subscribers.add_field(email: 'user@example.com', key: 'company', value: 'Acme Inc')
+      # Usage: Bento::Subscribers.add_field(email: 'test@bentonow.com', key: 'company', value: 'Acme Inc')
       def add_field(email:, key:, value:)
         run_command(command: 'add_field', email: email, query: { key: key, value: value })
       end
 
       # Remove a field from a subscriber
-      # Usage: Bento::Subscribers.remove_field(email: 'user@example.com', field: 'company')
+      # Usage: Bento::Subscribers.remove_field(email: 'test@bentonow.com', field: 'company')
       def remove_field(email:, field:)
         run_command(command: 'remove_field', email: email, query: field)
       end
 
       # Subscribe a user
-      # Usage: Bento::Subscribers.subscribe(email: 'user@example.com')
+      # Usage: Bento::Subscribers.subscribe(email: 'test@bentonow.com')
       def subscribe(email:)
         run_command(command: 'subscribe', email: email)
       end
 
       # Unsubscribe a user
-      # Usage: Bento::Subscribers.unsubscribe(email: 'user@example.com')
+      # Usage: Bento::Subscribers.unsubscribe(email: 'test@bentonow.com')
       def unsubscribe(email:)
         run_command(command: 'unsubscribe', email: email)
       end
