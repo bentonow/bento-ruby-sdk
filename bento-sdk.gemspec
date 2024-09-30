@@ -12,12 +12,12 @@ Gem::Specification.new do |spec|
   spec.description = "The Bentonow.com ruby analytics library"
   spec.authors = ["Bentonow.com"]
   spec.email = "support@Bentonow.com"
-  spec.homepage = "https://github.com/bentonow/bento-ruby-sdk"
+  spec.homepage = "https://github.com/bentonow/bento-rails-sdk"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6"
 
   # Used in gem
-  spec.add_dependency 'faraday', "2.7.10"
+  spec.add_dependency 'faraday', ">= 0.14"
 
   # Used in specs
   spec.add_development_dependency 'bundler', '>= 1.15'

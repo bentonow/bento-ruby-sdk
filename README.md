@@ -1,5 +1,5 @@
 # Bento SDK for Ruby
-[![Build Status](https://travis-ci.org/bentonow/bento-ruby-sdk.svg?branch=master)](https://travis-ci.org/bentonow/bento-ruby-sdk)
+[![Build Status](https://travis-ci.org/bentonow/bento-rails-sdk.svg?branch=master)](https://travis-ci.org/bentonow/bento-rails-sdk)
 
 🍱 Simple, powerful analytics for Ruby/Rails projects!
 
@@ -16,7 +16,7 @@ Track events, update data, record LTV and more in Ruby. Data is stored in your B
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bento-sdk', github: "bentonow/bento-ruby-sdk", branch: "master"
+gem 'bento-sdk', github: "bentonow/bento-rails-sdk", branch: "master"
 ```
 
 Then, to fetch the gem:
@@ -173,7 +173,7 @@ Bento::Events.import([
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/bentonow/bento-ruby-sdk. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/bentonow/bento-rails-sdk. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## DEPRECATED: Bento Analytics
 
