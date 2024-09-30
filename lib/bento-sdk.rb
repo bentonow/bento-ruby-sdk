@@ -2,6 +2,8 @@ require "bento/analytics"
 require "bento/core/client"
 require "bento/core/version"
 require "bento/resources/subscribers"
+require "bento/resources/events"
+
 require "bento/sdk/configuration"
 
 require 'forwardable'
@@ -42,6 +44,7 @@ module Bento
     def_delegators :@config, :publishable_key, :publishable_key=
     def_delegators :@config, :secret_key, :secret_key=
     def_delegators :@config, :log_level, :log_level=
+    def_delegators :@config, :dev_mode, :dev_mode=
 
     def config
       @config ||= Bento::Configuration.new

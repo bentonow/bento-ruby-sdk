@@ -4,6 +4,7 @@ module Bento
       site_uuid: nil,
       publishable_key: nil,
       secret_key: nil,
+      dev_mode: false,
       sync_strategy: nil,
       sync_strategy_options: {},
       log_level: :warn,
