@@ -1,5 +1,6 @@
 require "bento/analytics"
 require "bento/core/client"
+require "bento/core/error"
 require "bento/core/version"
 require "bento/resources/subscribers"
 require "bento/resources/events"

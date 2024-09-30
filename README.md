@@ -39,7 +39,29 @@ Bento.configure do |config|
 end
 ```
 
-## Usage
+## Optional: ActionMailer
+
+If you would like to use ActionMailer to send your emails, [install our ActionMailer gem](https://github.com/bentonow/bento-actionmailer) separately.
+
+## Typical Usage
+
+```ruby
+# Users signs up to your app
+Bento::Events.track(email: 'test@test.com', type: '$account.signed_up', fields: { first_name: 'Jesse', last_name: 'Hanley' })
+
+# User cancels their account
+Bento::Events.track(email: 'test@test.com', type: '$account.canceled')
+
+# Daily Cron Job to Sync Users
+Bento::Subscribers.import([
+  {email: 'test@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', widget_count: 1000},
+  {email: 'test2@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', company_name: 'Tanuki Inc.'}
+])
+```
+
+## Available Methods
+
+This Ruby SDK does not contain _all_ available API methods. Please refer to the [Bento API docs](https://docs.bentonow.com/) for all available methods. This remains an opinionated SDK based on the top use cases we've found at Bento for Ruby on Rails apps.
 
 ### Subscribers
 
@@ -47,6 +69,7 @@ end
 Perfect for quickly adding a subscriber to your Bento account or getting their information to use within your application.
 ```ruby
 subscriber = Bento::Subscribers.find_or_create_by(email: 'test@bentonow.com')
+subscriber.email
 ```
 
 #### Import or Update Subscribers in Bulk
@@ -151,6 +174,10 @@ Bento::Events.import([
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/bentonow/bento-ruby-sdk. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+## DEPRECATED: Bento Analytics
+
+The class Bento::Analytics has now been deprecated. Please only use the above Bento SDK for Ruby on Rails projects.
 
 ## License
 

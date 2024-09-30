@@ -14,9 +14,11 @@ module Bento
 
     def parse_response(response)
       if response.success?
+        body = JSON.parse(response.body)
+        
         JSON.parse(response.body)
       else
-        raise Bento::Error.from_response(response)
+        Bento::Error.raise_with_response(response)
       end
     end
 
