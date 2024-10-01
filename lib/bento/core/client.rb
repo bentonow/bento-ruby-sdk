@@ -1,11 +1,11 @@
 module Bento
   class Client
     def get(endpoint)
-      handle_connection_errors { conn.get(endpoint) }
+      handle_connection_errors { parse_response(conn.get(endpoint)) }
     end
 
     def post(endpoint, payload = nil)
-      handle_connection_errors { conn.post(endpoint, payload) }
+      handle_connection_errors { parse_response(conn.post(endpoint, payload)) }
     end
 
     private

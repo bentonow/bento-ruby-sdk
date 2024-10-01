@@ -58,7 +58,7 @@ module Bento
 
         payload = { events: events }.to_json
         response = client.post("api/v1/batch/events?#{URI.encode_www_form(default_params)}", payload)
-        JSON.parse(response.body)
+        Bento::Response.new(response)
       end
 
       private

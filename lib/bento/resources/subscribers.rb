@@ -9,7 +9,12 @@ module Bento
         params[:email] = email if email
         params[:uuid] = uuid if uuid
         response = client.get("api/v1/fetch/subscribers?#{URI.encode_www_form(params)}")
-        Subscriber.new(response['data'])
+        
+        if response['data'].nil?
+          raise StandardError, 'Bento Error: No user found with the given email or uuid'
+        else
+          Subscriber.new(response['data'])
+        end
       end
 
       # Import or update subscribers in bulk
@@ -17,7 +22,7 @@ module Bento
       def import(subscribers)
         payload = { subscribers: subscribers }.to_json
         response = client.post("api/v1/batch/subscribers?#{URI.encode_www_form(default_params)}", payload)
-        JSON.parse(response.body)
+        Bento::Response.new(response)
       end
 
       # Run a command to change a subscriber's data
@@ -32,7 +37,7 @@ module Bento
         }.to_json
         
         response = client.post("api/v1/fetch/commands?#{URI.encode_www_form(default_params)}", payload)
-        JSON.parse(response.body)
+        Bento::Response.new(response)
       end
 
       # Add a tag to a subscriber
