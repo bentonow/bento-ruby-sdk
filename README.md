@@ -47,18 +47,23 @@ If you would like to use ActionMailer to send your emails, [install our ActionMa
 ## Typical Usage
 
 ```ruby
-# Users signs up to your app
-event = Bento::Events.track(email: 'test@test.com', type: '$account.signed_up', fields: { first_name: 'Jesse', last_name: 'Hanley' })
+# User signs up to your app
+Bento::Events.track(email: 'test@test.com', type: '$account.signed_up', fields: { first_name: 'Jesse', last_name: 'Hanley' })
 
 # User cancels their account
 Bento::Events.track(email: 'test@test.com', type: '$account.canceled')
 
-# Daily Cron Job to Sync Users
+# User uses a feature
+Bento::Events.track(email: 'test@test.com', type: '$feature.used', details: { feature_name: 'KPI Dashboard' })
+
+# Daily job to sync user custom fields and tags
 import = Bento::Subscribers.import([
   {email: 'test@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', widget_count: 1000},
-  {email: 'test2@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', company_name: 'Tanuki Inc.'}
+  {email: 'test2@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', company_name: 'Tanuki Inc.'},
+  {email: 'test3@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', tags: 'lead,new_subscriber', remove_tags: 'customer'}
 ])
 
+# Easily check for errors
 if import.failed?
   raise StandardError, "Oh no! Something went wrong."
 end
@@ -84,30 +89,6 @@ Bento::Emails.send_transactional(
       link: "https://example.com/test"
   }
 )
-
-# Send bulk emails
-# LIMIT: 99 emails per request
-bulk_email = Bento::Emails.send_bulk([
-  {
-    to: "test@bentonow.com",
-    from: "newsletter@bento-experimental.sentbybento.com", 
-    subject: "Welcome to Bento, {{ visitor.first_name }}!",
-    html_body: "<p>Here is a link to your dashboard {{ link }}</p>",
-    personalizations: {
-      link: "https://example.com/test"
-    }
-  },
-  {
-    to: "test2@bentonow.com",
-    from: "newsletter@bento-experimental.sentbybento.com", 
-    subject: "Welcome to Bento, {{ visitor.first_name }}!",
-    html_body: "<p>Here is a link to your dashboard {{ link }}</p>",
-  }
-])
-
-if bulk_email.failed?
-  raise StandardError, "Oh no! Something went wrong."
-end
 
 ```
 
@@ -222,6 +203,37 @@ Bento::Events.import([
   {email: 'test@bentonow.com', type: 'Purchase', fields: { first_name: 'Jesse', last_name: 'Hanley' }}
 ])
 ```
+
+### Emails
+
+#### Send an Email
+
+```ruby
+Bento::Emails.send(
+  to: "test@bentonow.com",
+  from: "jesse@bentonow.com", # MUST BE AN AUTHOR IN YOUR ACCOUNT (EMAILS > AUTHORS)
+  subject: "Welcome to Bento, {{ visitor.first_name }}!",
+  html_body: "<p>Here is a link to your dashboard {{ link }}</p>",
+  personalizations: {
+      link: "https://example.com/test"
+  }
+)
+```
+
+#### Send a Transactional Email
+
+```ruby 
+Bento::Emails.send_transactional(
+  to: "test@bentonow.com",
+  from: "jesse@bentonow.com", # MUST BE AN AUTHOR IN YOUR ACCOUNT (EMAILS > AUTHORS)
+  subject: "Welcome to Bento, {{ visitor.first_name }}!",
+  html_body: "<p>Here is a link to your dashboard {{ link }}</p>",
+  personalizations: {
+      link: "https://example.com/test"
+  }
+)
+``` 
+
 
 ## Contributing
 
