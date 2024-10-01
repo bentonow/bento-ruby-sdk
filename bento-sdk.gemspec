@@ -8,11 +8,11 @@ Gem::Specification.new do |spec|
   spec.version = Bento::VERSION
   spec.files = Dir.glob("{lib,bin}/**/*")
   spec.require_paths = ["lib"]
-  spec.summary = "Bento Ruby SDK and tracking library"
-  spec.description = "The Bentonow.com ruby analytics library"
-  spec.authors = ["Bentonow.com"]
+  spec.summary = "Bento Ruby on Rails SDK"
+  spec.description = "The easiest way to track users and send emails in your Ruby on Rails app"
+  spec.authors = ["bentonow.com"]
   spec.email = "support@Bentonow.com"
-  spec.homepage = "https://github.com/bentonow/bento-rails-sdk"
+  spec.homepage = "https://github.com/bentonow/bento-ruby-sdk"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6"
 
