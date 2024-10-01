@@ -38,7 +38,7 @@ Bento.configure do |config|
   # Consider creating a new site for each environment (development and production) in your Bento account. 
   config.site_uuid = '123456789abcdefghijkllmnopqqrstu'
 
-  # This is your admin user's API keys.
+  # This is your (or another user in your team's) API keys.
   # IMPORTANT: Never store these in your source code as they give full access to your Bento account.
   config.publishable_key = ENV['BENTO_PUBLISHABLE_KEY']
   config.secret_key = ENV['BENTO_SECRET_KEY']
