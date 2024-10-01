@@ -206,7 +206,7 @@ Bento::Events.import([
 
 ### Emails
 
-#### Send an Email
+#### Send an Email (honors subscription status)
 
 ```ruby
 Bento::Emails.send(
@@ -220,7 +220,7 @@ Bento::Emails.send(
 )
 ```
 
-#### Send a Transactional Email
+#### Send a Transactional Email (always sends, even if user is unsubscribed)
 
 ```ruby 
 Bento::Emails.send_transactional(
