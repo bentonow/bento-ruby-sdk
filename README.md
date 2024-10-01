@@ -34,9 +34,14 @@ Configure the SDK in an initializer:
 # config/initializers/bento.rb
 
 Bento.configure do |config|
+  # This is your site's UUID. This scopes all requests.
+  # Consider creating a new site for each environment (development and production) in your Bento account. 
   config.site_uuid = '123456789abcdefghijkllmnopqqrstu'
-  config.publishable_key = 'p9999aaaabbbbccccddddeeeeffff'
-  config.secret_key = 'sc9999aaaabbbbccccddddeeeeffffgggg'
+
+  # This is your admin user's API keys.
+  # IMPORTANT: Never store these in your source code as they give full access to your Bento account.
+  config.publishable_key = ENV['BENTO_PUBLISHABLE_KEY']
+  config.secret_key = ENV['BENTO_SECRET_KEY']
 end
 ```
 
