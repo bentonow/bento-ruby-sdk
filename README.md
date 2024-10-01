@@ -16,7 +16,6 @@ Track events, update user data, record LTV and more in Ruby. Data is stored in y
 **Important note:** Faraday is currently a dependency of this gem, and the minimum ruby version required is **2.6** as that's the minimum version required by the Faraday gem.
 
 Add this line to your application's Gemfile:
-
 ```ruby
 gem 'bento-sdk', github: "bentonow/bento-ruby-sdk", branch: "master"
 ```
@@ -55,12 +54,12 @@ event = Bento::Events.track(email: 'test@test.com', type: '$account.signed_up', 
 Bento::Events.track(email: 'test@test.com', type: '$account.canceled')
 
 # Daily Cron Job to Sync Users
-import_job = Bento::Subscribers.import([
+import = Bento::Subscribers.import([
   {email: 'test@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', widget_count: 1000},
   {email: 'test2@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', company_name: 'Tanuki Inc.'}
 ])
 
-if import_job.failed?
+if import.failed?
   raise StandardError, "Oh no! Something went wrong."
 end
 
@@ -85,6 +84,31 @@ Bento::Emails.send_transactional(
       link: "https://example.com/test"
   }
 )
+
+# Send bulk emails
+# LIMIT: 99 emails per request
+bulk_email = Bento::Emails.send_bulk([
+  {
+    to: "test@bentonow.com",
+    from: "newsletter@bento-experimental.sentbybento.com", 
+    subject: "Welcome to Bento, {{ visitor.first_name }}!",
+    html_body: "<p>Here is a link to your dashboard {{ link }}</p>",
+    personalizations: {
+      link: "https://example.com/test"
+    }
+  },
+  {
+    to: "test2@bentonow.com",
+    from: "newsletter@bento-experimental.sentbybento.com", 
+    subject: "Welcome to Bento, {{ visitor.first_name }}!",
+    html_body: "<p>Here is a link to your dashboard {{ link }}</p>",
+  }
+])
+
+if bulk_email.failed?
+  raise StandardError, "Oh no! Something went wrong."
+end
+
 ```
 
 ## Available Methods
