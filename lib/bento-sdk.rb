@@ -5,6 +5,7 @@ require "bento/core/response"
 require "bento/core/version"
 require "bento/resources/subscribers"
 require "bento/resources/events"
+require "bento/resources/emails"
 
 require "bento/sdk/configuration"
 

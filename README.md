@@ -49,16 +49,42 @@ If you would like to use ActionMailer to send your emails, [install our ActionMa
 
 ```ruby
 # Users signs up to your app
-Bento::Events.track(email: 'test@test.com', type: '$account.signed_up', fields: { first_name: 'Jesse', last_name: 'Hanley' })
+event = Bento::Events.track(email: 'test@test.com', type: '$account.signed_up', fields: { first_name: 'Jesse', last_name: 'Hanley' })
 
 # User cancels their account
 Bento::Events.track(email: 'test@test.com', type: '$account.canceled')
 
 # Daily Cron Job to Sync Users
-Bento::Subscribers.import([
+import_job = Bento::Subscribers.import([
   {email: 'test@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', widget_count: 1000},
   {email: 'test2@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', company_name: 'Tanuki Inc.'}
 ])
+
+if import_job.failed?
+  raise StandardError, "Oh no! Something went wrong."
+end
+
+# Send an email directly via the API (honors subscription status)
+Bento::Emails.send(
+  to: "test@bentonow.com",
+  from: "jesse@bentonow.com", # MUST BE AN AUTHOR IN YOUR ACCOUNT (EMAILS > AUTHORS)
+  subject: "Welcome to Bento, {{ visitor.first_name }}!",
+  html_body: "<p>Here is a link to your dashboard {{ link }}</p>",
+  personalizations: {
+      link: "https://example.com/test"
+  }
+)
+
+# Send a transactional email (always sends, even if user is unsubscribed)
+Bento::Emails.send_transactional(
+  to: "test@bentonow.com",
+  from: "jesse@bentonow.com", # MUST BE AN AUTHOR IN YOUR ACCOUNT (EMAILS > AUTHORS)
+  subject: "Reset Password",
+  html_body: "<p>Here is a link to reset your password ... {{ link }}</p>",
+  personalizations: {
+      link: "https://example.com/test"
+  }
+)
 ```
 
 ## Available Methods
