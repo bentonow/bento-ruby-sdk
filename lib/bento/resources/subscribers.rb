@@ -16,7 +16,8 @@ module Bento
       # Usage: Bento::Subscribers.import([{email: 'user1@example.com', first_name: 'John'}, {email: 'user2@example.com', last_name: 'Doe'}])
       def import(subscribers)
         payload = { subscribers: subscribers }.to_json
-        client.post("api/v1/batch/subscribers?#{URI.encode_www_form(default_params)}", payload)
+        response = client.post("api/v1/batch/subscribers?#{URI.encode_www_form(default_params)}", payload)
+        JSON.parse(response.body)
       end
 
       # Run a command to change a subscriber's data
@@ -31,7 +32,7 @@ module Bento
         }.to_json
         
         response = client.post("api/v1/fetch/commands?#{URI.encode_www_form(default_params)}", payload)
-        response
+        JSON.parse(response.body)
       end
 
       # Add a tag to a subscriber
