@@ -57,7 +57,8 @@ module Bento
         events.each { |event| validate_event(event) }
 
         payload = { events: events }.to_json
-        client.post("api/v1/batch/events?#{URI.encode_www_form(default_params)}", payload)
+        response = client.post("api/v1/batch/events?#{URI.encode_www_form(default_params)}", payload)
+        JSON.parse(response.body)
       end
 
       private
