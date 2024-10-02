@@ -239,6 +239,19 @@ Bento::Emails.send_transactional(
 )
 ``` 
 
+### Spam API
+
+#### Check if an email is valid
+
+```ruby
+Bento::Spam.valid?('test@bentonow.com')
+```
+
+#### Check if an email is risky
+
+```ruby
+Bento::Spam.risky?('test@bentonow.com')
+```
 
 ## Contributing
 
