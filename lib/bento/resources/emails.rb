@@ -36,7 +36,7 @@ module Bento
 
       def send_bulk(emails)
         raise ArgumentError, 'Emails must be an array' unless emails.is_a?(Array)
-        emails.each { |email| validate_email(email) }
+        emails.each { |email| validate_email(email[:to]); validate_email(email[:from]) }
 
         payload = { emails: emails }.to_json
         response = client.post("api/v1/batch/emails?#{URI.encode_www_form(default_params)}", payload)
