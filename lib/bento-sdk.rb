@@ -3,6 +3,9 @@ require "bento/core/client"
 require "bento/core/error"
 require "bento/core/response"
 require "bento/core/version"
+require "bento/core/validators/base"
+require "bento/core/validators/event_validators"
+require "bento/core/validators/email_validators"
 require "bento/resources/subscribers"
 require "bento/resources/events"
 require "bento/resources/emails"
@@ -41,7 +44,7 @@ module Bento
 
   class << self
     extend Forwardable
-    
+
     # User configurable options
     def_delegators :@config, :site_uuid, :site_uuid=
     def_delegators :@config, :publishable_key, :publishable_key=
