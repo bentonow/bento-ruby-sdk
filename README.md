@@ -24,7 +24,8 @@ Table of contents
     * [Installation](#installation)
     * [Configuration](#configuration)
 * [Modules](#modules)
-* [DEPRECATED](#deprecated)
+* [Optional](#optional)
+* [Deprecated](#deprecated)
 * [Contributing](#contributing)
 * [License](#license)
 <!--te-->
@@ -68,13 +69,19 @@ Configure the SDK in an initializer:
 # config/initializers/bento.rb
 
 Bento.configure do |config|
+  # This is your site's UUID. This scopes all requests.
+  # Consider creating a new site for each environment (development and production) in your Bento account.
   config.site_uuid = 'your-site-uuid'
+  # This is your (or another user in your team's) API keys.
+  # IMPORTANT: Never store these in your source code as they give full access to your Bento account.
   config.publishable_key = ENV['BENTO_PUBLISHABLE_KEY']
   config.secret_key = ENV['BENTO_SECRET_KEY']
 end
 ```
 
 ## Modules
+
+This Ruby SDK does not contain all available API methods. Please refer to the [Bento API docs](https://docs.bentonow.com/) for all available methods. This remains an opinionated SDK based on the top use cases we've found at Bento for Ruby on Rails apps.
 
 ### Subscribers
 
@@ -184,6 +191,11 @@ Bento::Spam.valid?('user@example.com')
 ```ruby
 Bento::Spam.risky?('user@example.com')
 ```
+
+## Optional
+###ActionMailer
+
+If you would like to use ActionMailer to send your emails, [install our ActionMailer gem](https://github.com/bentonow/bento-actionmailer) separately.
 
 ## DEPRECATED
 
