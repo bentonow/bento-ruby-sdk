@@ -1,32 +1,65 @@
-# Bento SDK for Ruby on Rails
+<p align="center"><img src="/art/bento-ruby-sdk.png" alt="Bento Ruby SDK"></p>
+
+
 [![Build Status](https://travis-ci.org/bentonow/bento-rails-sdk.svg?branch=master)](https://travis-ci.org/bentonow/bento-rails-sdk)
 
-🍱 Simple, powerful email marketing and automation for Ruby on Rails projects!
+> [!TIP]
+> Need help? Join our [discord](https://discord.com/invite/ssXXFRmt5F) or email jesse@bentonow.com for personalized support.
 
-Track events, update user data, record LTV and more in Ruby. Data is stored in your Bento account so you can easily research and investigate what's going on. Use this gem to integrate Bento into your Ruby on Rails app!
+The Bento Ruby on Rails SDK makes it quick and easy to build an excellent email marketing and automation experience in your Rails application. We provide powerful and customizable APIs that can be used out-of-the-box to track your users' behavior, manage subscribers, and send emails. We also expose low-level APIs so that you can build fully custom experiences.
 
-👋 To get personalized support, please tweet @bento or email jesse@bentonow.com!
+Get started with our [📚 integration guides](https://bentonow.com/docs) and [example projects](#examples), or [📘 browse the SDK reference](https://bentonow.com/docs/api).
 
 🐶 Battle-tested on Bento Production (we dog food this gem ourselves)!
-
 🤝 Contributions welcome and rewarded! Add a PR request for a surprise!
 
-## Installation
+Table of contents
+=================
 
-**Important note:** Faraday is currently a dependency of this gem, and the minimum ruby version required is **2.6** as that's the minimum version required by the Faraday gem.
+<!--ts-->
+* [Features](#features)
+* [Requirements](#requirements)
+* [Getting started](#getting-started)
+    * [Installation](#installation)
+    * [Configuration](#configuration)
+* [Modules](#modules)
+* [DEPRECATED](#deprecated)
+* [Contributing](#contributing)
+* [License](#license)
+<!--te-->
+
+## Features
+
+* **Simple event tracking**: We make it easy for you to track user events and behavior in your application.
+* **Subscriber management**: Easily add, update, and remove subscribers from your Bento account.
+* **Custom fields**: Track and update custom fields for your subscribers to store additional data.
+* **Email sending**: Send both regular and transactional emails directly through the SDK.
+* **Batch operations**: Perform bulk imports of subscribers and events for efficient data management.
+* **Spam checking**: Validate email addresses and check for risky emails.
+
+## Requirements
+
+The Bento Ruby SDK requires Ruby 2.6+ due to its dependency on Faraday.
+
+Bento Account for a valid SITE_UUID, BENTO_PUBLISHABLE_KEY & BENTO_SECRET_KEY.
+
+## Getting started
+
+### Installation
 
 Add this line to your application's Gemfile:
+
 ```ruby
 gem 'bento-sdk', github: "bentonow/bento-ruby-sdk", branch: "master"
 ```
 
-Then, to fetch the gem:
+Then, run:
 
 ```bash
 $ bundle install
 ```
 
-## Configuration
+### Configuration
 
 Configure the SDK in an initializer:
 
@@ -34,84 +67,26 @@ Configure the SDK in an initializer:
 # config/initializers/bento.rb
 
 Bento.configure do |config|
-  # This is your site's UUID. This scopes all requests.
-  # Consider creating a new site for each environment (development and production) in your Bento account. 
-  config.site_uuid = '123456789abcdefghijkllmnopqqrstu'
-
-  # This is your (or another user in your team's) API keys.
-  # IMPORTANT: Never store these in your source code as they give full access to your Bento account.
+  config.site_uuid = 'your-site-uuid'
   config.publishable_key = ENV['BENTO_PUBLISHABLE_KEY']
   config.secret_key = ENV['BENTO_SECRET_KEY']
 end
 ```
 
-## Optional: ActionMailer
-
-If you would like to use ActionMailer to send your emails, [install our ActionMailer gem](https://github.com/bentonow/bento-actionmailer) separately.
-
-## Typical Usage
-
-```ruby
-# User signs up to your app
-Bento::Events.track(email: 'test@test.com', type: '$account.signed_up', fields: { first_name: 'Jesse', last_name: 'Hanley' })
-
-# User cancels their account
-Bento::Events.track(email: 'test@test.com', type: '$account.canceled')
-
-# User uses a feature
-Bento::Events.track(email: 'test@test.com', type: '$feature.used', details: { feature_name: 'KPI Dashboard' })
-
-# Daily job to sync user custom fields and tags
-import = Bento::Subscribers.import([
-  {email: 'test@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', widget_count: 1000},
-  {email: 'test2@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', company_name: 'Tanuki Inc.'},
-  {email: 'test3@bentonow.com', first_name: 'Jesse', last_name: 'Hanley', tags: 'lead,new_subscriber', remove_tags: 'customer'}
-])
-
-# Easily check for errors
-if import.failed?
-  raise StandardError, "Oh no! Something went wrong."
-end
-
-# Send an email directly via the API (honors subscription status)
-Bento::Emails.send(
-  to: "test@bentonow.com",
-  from: "jesse@bentonow.com", # MUST BE AN AUTHOR IN YOUR ACCOUNT (EMAILS > AUTHORS)
-  subject: "Welcome to Bento, {{ visitor.first_name }}!",
-  html_body: "<p>Here is a link to your dashboard {{ link }}</p>",
-  personalizations: {
-      link: "https://example.com/test"
-  }
-)
-
-# Send a transactional email (always sends, even if user is unsubscribed)
-Bento::Emails.send_transactional(
-  to: "test@bentonow.com",
-  from: "jesse@bentonow.com", # MUST BE AN AUTHOR IN YOUR ACCOUNT (EMAILS > AUTHORS)
-  subject: "Reset Password",
-  html_body: "<p>Here is a link to reset your password ... {{ link }}</p>",
-  personalizations: {
-      link: "https://example.com/test"
-  }
-)
-
-```
-
-## Available Methods
-
-This Ruby SDK does not contain _all_ available API methods. Please refer to the [Bento API docs](https://docs.bentonow.com/) for all available methods. This remains an opinionated SDK based on the top use cases we've found at Bento for Ruby on Rails apps.
+## Modules
 
 ### Subscribers
 
+Manage subscribers in your Bento account.
+
 #### Find or Create a Subscriber
-Perfect for quickly adding a subscriber to your Bento account or getting their information to use within your application.
+
 ```ruby
-subscriber = Bento::Subscribers.find_or_create_by(email: 'test@bentonow.com')
-subscriber.email
+subscriber = Bento::Subscribers.find_or_create_by(email: 'user@example.com')
 ```
 
 #### Import or Update Subscribers in Bulk
-Perfect for quickly adding subscribers (or fifty) to your Bento account.
+
 ```ruby
 Bento::Subscribers.import([
   {email: 'user1@example.com', first_name: 'John'},
@@ -122,81 +97,33 @@ Bento::Subscribers.import([
 #### Add a Tag
 
 ```ruby
-Bento::Subscribers.add_tag(email: 'test@bentonow.com', tag: 'new_tag')
-```
-
-#### Add a Tag via Event
-
-```ruby
-Bento::Subscribers.add_tag_via_event(email: 'test@bentonow.com', tag: 'event_tag')
+Bento::Subscribers.add_tag(email: 'user@example.com', tag: 'new_tag')
 ```
 
 #### Remove a Tag
 
 ```ruby
-Bento::Subscribers.remove_tag(email: 'test@bentonow.com', tag: 'old_tag')
-```
-
-#### Add a Field
-
-```ruby
-Bento::Subscribers.add_field(email: 'test@bentonow.com', key: 'company', value: 'Acme Inc')
-```
-
-#### Remove a Field
-
-```ruby
-Bento::Subscribers.remove_field(email: 'test@bentonow.com', field: 'company')
-```
-
-#### Subscribe a User
-
-```ruby
-Bento::Subscribers.subscribe(email: 'test@bentonow.com')
-```
-
-#### Unsubscribe a User
-
-```ruby
-Bento::Subscribers.unsubscribe(email: 'test@bentonow.com')
-```
-
-#### Change a Subscriber's Email
-
-```ruby
-Bento::Subscribers.change_email(old_email: 'old@example.com', new_email: 'new@example.com')
+Bento::Subscribers.remove_tag(email: 'user@example.com', tag: 'old_tag')
 ```
 
 ### Events
 
+Track events in your application.
+
 #### Track a Basic Event
 
 ```ruby
-Bento::Events.track(email: 'test@test.com', type: '$completed_onboarding')
+Bento::Events.track(email: 'user@example.com', type: '$completed_onboarding')
 ```
 
 #### Track an Event with Fields
 
 ```ruby
 Bento::Events.track(
-  email: 'test@test.com',
+  email: 'user@example.com',
   type: '$completed_onboarding',
-  fields: { first_name: 'Jesse', last_name: 'Pinkman' }, # optional
-  details: { some_data: 'some_value' }  # optional
-)
-```
-
-#### Track a Unique Event (such as a purchase)
-
-```ruby
-Bento::Events.track(
-  email: 'test@test.com',
-  type: '$purchase',
-  fields: { first_name: 'Jesse' },
-  details: {
-    unique: { key: 'test123' },
-    value: { currency: 'USD', amount: 8000 }, # in cents
-  }
+  fields: { first_name: 'John', last_name: 'Doe' },
+  details: { some_data: 'some_value' }
 )
 ```
 
@@ -204,63 +131,67 @@ Bento::Events.track(
 
 ```ruby
 Bento::Events.import([
-  {email: 'test@bentonow.com', type: 'Login'},
-  {email: 'test@bentonow.com', type: 'Purchase', fields: { first_name: 'Jesse', last_name: 'Hanley' }}
+  {email: 'user1@example.com', type: 'Login'},
+  {email: 'user2@example.com', type: 'Purchase', fields: { product: 'T-shirt' }}
 ])
 ```
 
 ### Emails
 
-#### Send an Email (honors subscription status)
+Send emails through Bento.
+
+#### Send an Email
 
 ```ruby
 Bento::Emails.send(
-  to: "test@bentonow.com",
-  from: "jesse@bentonow.com", # MUST BE AN AUTHOR IN YOUR ACCOUNT (EMAILS > AUTHORS)
-  subject: "Welcome to Bento, {{ visitor.first_name }}!",
-  html_body: "<p>Here is a link to your dashboard {{ link }}</p>",
+  to: "user@example.com",
+  from: "noreply@yourdomain.com",
+  subject: "Welcome to Our App, {{ visitor.first_name }}!",
+  html_body: "<p>Click here to get started: {{ link }}</p>",
   personalizations: {
-      link: "https://example.com/test"
+      link: "https://yourdomain.com/start"
   }
 )
 ```
 
-#### Send a Transactional Email (always sends, even if user is unsubscribed)
+#### Send a Transactional Email
 
-```ruby 
+```ruby
 Bento::Emails.send_transactional(
-  to: "test@bentonow.com",
-  from: "jesse@bentonow.com", # MUST BE AN AUTHOR IN YOUR ACCOUNT (EMAILS > AUTHORS)
-  subject: "Welcome to Bento, {{ visitor.first_name }}!",
-  html_body: "<p>Here is a link to your dashboard {{ link }}</p>",
+  to: "user@example.com",
+  from: "noreply@yourdomain.com",
+  subject: "Password Reset",
+  html_body: "<p>Click here to reset your password: {{ reset_link }}</p>",
   personalizations: {
-      link: "https://example.com/test"
+      reset_link: "https://yourdomain.com/reset-password"
   }
 )
-``` 
+```
 
 ### Spam API
+
+Check email validity and risk.
 
 #### Check if an email is valid
 
 ```ruby
-Bento::Spam.valid?('test@bentonow.com')
+Bento::Spam.valid?('user@example.com')
 ```
 
 #### Check if an email is risky
 
 ```ruby
-Bento::Spam.risky?('test@bentonow.com')
+Bento::Spam.risky?('user@example.com')
 ```
 
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/bentonow/bento-ruby-sdk. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-## DEPRECATED: Bento Analytics
+## DEPRECATED
 
 The class Bento::Analytics has now been deprecated. Please only use the above Bento SDK for Ruby on Rails projects.
 
+## Contributing
+
+We welcome contributions! Please see our [contributing guidelines](CODE_OF_CONDUCT.md) for details on how to submit pull requests, report issues, and suggest improvements.
+
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+The Bento SDK for Ruby on Rails is available as open source under the terms of the [MIT License](LICENSE.md).
