@@ -8,9 +8,10 @@
 
 The Bento Ruby on Rails SDK makes it quick and easy to build an excellent email marketing and automation experience in your Rails application. We provide powerful and customizable APIs that can be used out-of-the-box to track your users' behavior, manage subscribers, and send emails. We also expose low-level APIs so that you can build fully custom experiences.
 
-Get started with our [📚 integration guides](https://bentonow.com/docs) and [example projects](#examples), or [📘 browse the SDK reference](https://bentonow.com/docs/api).
+Get started with our [📚 integration guides](https://docs.bentonow.com/) or [📘 browse the SDK reference](https://docs.bentonow.com/subscribers).
 
 🐶 Battle-tested on Bento Production (we dog food this gem ourselves)!
+
 🤝 Contributions welcome and rewarded! Add a PR request for a surprise!
 
 Table of contents
@@ -39,9 +40,9 @@ Table of contents
 
 ## Requirements
 
-The Bento Ruby SDK requires Ruby 2.6+ due to its dependency on Faraday.
+The Bento Ruby SDK requires Ruby 2.6+ due to its dependency on [Faraday](https://lostisland.github.io/faraday/#/).
 
-Bento Account for a valid SITE_UUID, BENTO_PUBLISHABLE_KEY & BENTO_SECRET_KEY.
+Bento Account for a valid **SITE_UUID**, **BENTO_PUBLISHABLE_KEY** & **BENTO_SECRET_KEY**.
 
 ## Getting started
 
