@@ -1,7 +1,5 @@
-<p align="center"><img src="/art/bento-ruby-sdk.png" alt="Bento Ruby SDK"></p>
-
-
-[![Build Status](https://travis-ci.org/bentonow/bento-rails-sdk.svg?branch=master)](https://travis-ci.org/bentonow/bento-rails-sdk)
+# Bento Ruby on Rails SDK
+<img align="right" src="https://app.bentonow.com/brand/logoanim.gif">
 
 > [!TIP]
 > Need help? Join our [discord](https://discord.com/invite/ssXXFRmt5F) or email jesse@bentonow.com for personalized support.
@@ -13,6 +11,8 @@ Get started with our [📚 integration guides](https://docs.bentonow.com/) or [�
 🐶 Battle-tested on Bento Production (we dog food this gem ourselves)!
 
 🤝 Contributions welcome and rewarded! Add a PR request for a surprise!
+
+[![Build Status](https://travis-ci.org/bentonow/bento-rails-sdk.svg?branch=master)](https://travis-ci.org/bentonow/bento-rails-sdk)
 
 Table of contents
 =================
