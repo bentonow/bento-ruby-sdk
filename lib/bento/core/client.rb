@@ -1,4 +1,8 @@
 module Bento
+  # Client class for interacting with the Bento API.
+  # This class provides methods for making HTTP GET and POST requests to the API,
+  # handles authentication, connection errors, and response parsing.
+  # It also supports a development mode for local testing.
   class Client
     def get(endpoint)
       handle_connection_errors { parse_response(conn.get(endpoint)) }
@@ -24,7 +28,7 @@ module Bento
 
     def conn
       Faraday.new(
-        url: dev_mode? ? 'http://localhost:3000' : 'https://app.bentonow.com',
+        url: Bento.dev_mode ? 'http://localhost:3000' : 'https://app.bentonow.com',
         headers: {
           'Content-Type' => 'application/json',
           'Accept' => 'application/json',
@@ -34,14 +38,10 @@ module Bento
       )
     end
 
-    def dev_mode?
-      Bento.dev_mode || false
-    end
-
     def handle_connection_errors
       yield
-    rescue Faraday::ConnectionFailed => e
-      raise Bento::ConnectionError, "Failed to connect to the server: #{e.message}"
+    rescue Faraday::ConnectionFailed => exception
+      raise Bento::ConnectionError, "Failed to connect to the server: #{exception.message}"
     end
   end
 end
