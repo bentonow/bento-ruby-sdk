@@ -1,7 +1,7 @@
 module Bento
   module Validators
     module EventValidators
-      ef validate_details(details)
+      def validate_details(details)
         raise ArgumentError, 'Details must be a hash' unless details.is_a?(Hash)
         validate_unique(details[:unique]) if details.key?(:unique)
         validate_value(details[:value]) if details.key?(:value)
