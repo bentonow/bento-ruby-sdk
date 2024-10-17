@@ -178,7 +178,7 @@ Bento::Emails.send_transactional(
 
 ### Spam API
 
-Check email validity and risk.
+Check email validity and risk. Works fantastic for B2B apps and use-cases. Not recommended for B2C/consumer apps.
 
 #### Check if an email is valid
 
