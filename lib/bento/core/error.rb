@@ -1,4 +1,7 @@
 module Bento
+  # Custom error class for handling Bento API errors.
+  # This class encapsulates the HTTP response and provides
+  # a formatted error message for easier debugging and error handling.
   class Error < StandardError
     attr_reader :response
 
