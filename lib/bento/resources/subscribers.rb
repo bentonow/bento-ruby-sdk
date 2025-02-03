@@ -1,14 +1,34 @@
 module Bento
   class Subscribers
     class << self
-      # Find or create a subscriber by email or uuid
-      # Usage: Bento::Subscribers.find_or_create_by(email: 'test@bentonow.com')
-      # or: Bento::Subscribers.find_or_create_by(uuid: 'subscriber-uuid')
-      def find_or_create_by(email: nil, uuid: nil)
+      # Find a subscriber by email or uuid
+      # Usage: Bento::Subscribers.find_by(email: 'test@bentonow.com')
+      # or: Bento::Subscribers.find_by(uuid: 'subscriber-uuid')
+      def find_by(email: nil, uuid: nil)
         params = default_params
         params[:email] = email if email
         params[:uuid] = uuid if uuid
         response = client.get("api/v1/fetch/subscribers?#{URI.encode_www_form(params)}")
+        
+        if response['data'].nil?
+          raise StandardError, 'Bento Error: No user found with the given email or uuid'
+        else
+          Subscriber.new(response['data'])
+        end
+      end
+      
+      # Find or create a subscriber by email or uuid
+      # Usage: Bento::Subscribers.find_or_create_by(email: 'test@bentonow.com')
+      # or: Bento::Subscribers.find_or_create_by(uuid: 'subscriber-uuid')
+      def find_or_create_by(email: nil)
+        params = default_params
+        payload = {
+          subscriber: {
+            email: email
+          }.compact
+        }.to_json
+
+        response = client.post("api/v1/fetch/subscribers?#{URI.encode_www_form(params)}", payload)
         
         if response['data'].nil?
           raise StandardError, 'Bento Error: No user found with the given email or uuid'
