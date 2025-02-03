@@ -14,6 +14,7 @@ Gem::Specification.new do |spec|
   spec.email = "support@Bentonow.com"
   spec.homepage = "https://github.com/bentonow/bento-ruby-sdk"
   spec.license = "MIT"
+  
   spec.required_ruby_version = ">= 2.6"
 
   # Used in gem

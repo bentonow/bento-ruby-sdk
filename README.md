@@ -52,7 +52,13 @@ Bento Account for a valid **SITE_UUID**, **BENTO_PUBLISHABLE_KEY** & **BENTO_SEC
 Add this line to your application's Gemfile:
 
 ```ruby
+# Install from GitHub
 gem 'bento-sdk', github: "bentonow/bento-ruby-sdk", branch: "master"
+
+### OR ###
+
+# Install from RubyGems
+gem 'bento-sdk', '~> 0.5.0'
 ```
 
 Then, run:
