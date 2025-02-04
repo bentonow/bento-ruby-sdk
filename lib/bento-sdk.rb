@@ -15,6 +15,7 @@ require "bento/sdk/configuration"
 
 require 'forwardable'
 require 'faraday'
+require 'base64'
 
 module Bento
   class Error < StandardError; end
