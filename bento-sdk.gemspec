@@ -14,11 +14,12 @@ Gem::Specification.new do |spec|
   spec.email = "support@Bentonow.com"
   spec.homepage = "https://github.com/bentonow/bento-ruby-sdk"
   spec.license = "MIT"
-  
+
   spec.required_ruby_version = ">= 2.6"
 
   # Used in gem
   spec.add_dependency 'faraday', ">= 0.14"
+  spec.add_dependency 'base64', '~> 0.1'
 
   # Used in specs
   spec.add_development_dependency 'bundler', '>= 1.15'
