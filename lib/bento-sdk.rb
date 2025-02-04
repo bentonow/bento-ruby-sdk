@@ -47,11 +47,11 @@ module Bento
     extend Forwardable
 
     # User configurable options
-    def_delegators :@config, :site_uuid, :site_uuid=
-    def_delegators :@config, :publishable_key, :publishable_key=
-    def_delegators :@config, :secret_key, :secret_key=
-    def_delegators :@config, :log_level, :log_level=
-    def_delegators :@config, :dev_mode, :dev_mode=
+    def_delegators :config, :site_uuid, :site_uuid=
+    def_delegators :config, :publishable_key, :publishable_key=
+    def_delegators :config, :secret_key, :secret_key=
+    def_delegators :config, :log_level, :log_level=
+    def_delegators :config, :dev_mode, :dev_mode=
 
     def config
       @config ||= Bento::Configuration.new
