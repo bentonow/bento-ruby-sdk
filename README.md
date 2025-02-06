@@ -198,6 +198,17 @@ Bento::Spam.valid?('user@example.com')
 Bento::Spam.risky?('user@example.com')
 ```
 
+#### Check against the special "Jesse's Ruleset"
+If you're looking to really strengthen your email validation, specifically for B2B apps, you can use the special "Jesse's Ruleset". It is VERY opinionated but will stop abuse in its tracks.
+
+```ruby
+reasons_not_to_accept = Bento::Spam::JessesRuleset.reasons('user@example.com', block_free_providers: true, wiggleroom: true)
+
+reasons_not_to_accept.each do |reason|
+  # errors.add(:email, reason)
+end
+```
+
 ## Optional
 ###ActionMailer
 

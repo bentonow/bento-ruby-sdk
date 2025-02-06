@@ -10,6 +10,7 @@ require "bento/resources/subscribers"
 require "bento/resources/events"
 require "bento/resources/emails"
 require "bento/resources/spam"
+require "bento/resources/jesses_ruleset"
 
 require "bento/sdk/configuration"
 
